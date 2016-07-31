@@ -1,0 +1,21 @@
+{
+  "name": "OncoGrid",
+  "description": "TypeScript OncoGrid",
+  "version": "0.0.1",
+  "authors": [
+    {
+      "name": "Dusan Andric"
+    }
+  ],
+  "license": "GPLv3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "3.5.6"
+  }
+}
