@@ -64,9 +64,9 @@ class OncoGrid implements Chart {
         .data(_self.z).enter()
         .append('rect')
         .transition()
-        .attr('class', function(d) { return _self.config.prefix+'sortable-rect ' + d.xId + '-cell ' + d.yId + '-cell'; })
-        .attr('x', function(d) { return _self.xScale(_self.getIndex(_self.x, d.xId)); })
-        .attr('y', function(d) { return _self.yScale(_self.getIndex(_self.y, d.yId)); })
+        .attr('class', (d) => _self.config.prefix+'sortable-rect ' + d.xId + '-cell ' + d.yId + '-cell')
+        .attr('x', (d) => _self.xScale(_self.getIndex(_self.x, d.xId)) )
+        .attr('y', (d) => _self.yScale(_self.getIndex(_self.y, d.yId)) )
         .attr('height', _self.cellHeight)
         .attr('width', _self.cellWidth)
         .attr('fill', 'red');
@@ -106,10 +106,8 @@ class OncoGrid implements Chart {
             .data(this.x)
             .enter().append('g')
             .attr('class', this.config.prefix + 'column')
-            .attr('xId', function (d) { return d.id; })
-            .attr('transform', function (d, i) {
-                return 'translate(' + _self.xScale(i) + ')rotate(-90)';
-            });
+            .attr('xId', (d) => d.id )
+            .attr('transform', (d, i) => 'translate(' + _self.xScale(i) + ')rotate(-90)');
 
         this.column.append('line').attr('x1', -1 * this.config.width);
     }
@@ -125,9 +123,7 @@ class OncoGrid implements Chart {
             .data(this.y)
             .enter().append('g')
             .attr('class', this.config.prefix + 'row')
-            .attr('transform', function (d, i) {
-                return 'translate(0,' + _self.yScale(i) + ')';
-            });
+            .attr('transform', (d, i) => 'translate(0,' + _self.yScale(i) + ')');
 
         this.row.append('line').attr('x2', this.config.height);
     }
