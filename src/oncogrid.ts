@@ -37,11 +37,15 @@ class OncoGrid implements Chart {
     public init() {
         console.log('Intializing SVG for OncoGrid');
 
+        var margin = this.config.margin;
+
         this.svg = d3.select(this.config.element)
             .append('svg')
-            .attr('width', this.config.width)
-            .attr('height', this.config.height)
-            .append('g');
+            .attr('width', this.config.width + margin.left + margin.right)
+            .attr('height', this.config.height + margin.top + margin.bottom)
+            .style('margin-left', margin.left + 'px')
+            .append('g')
+            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
         this.svg.append('rect')
             .attr('class', 'background')
@@ -125,7 +129,15 @@ class OncoGrid implements Chart {
             .attr('class', this.config.prefix + 'row')
             .attr('transform', (d, i) => 'translate(0,' + _self.yScale(i) + ')');
 
-        this.row.append('line').attr('x2', this.config.height);
+        this.row.append('line')
+            .attr('x2', this.config.height);
+
+        this.row.append('text')
+            .attr('class', (d) => d.id + '-label')
+            .attr('x', -8)
+            .attr('text-anchor', 'end')
+            .attr('y', this.cellHeight / 2)
+            .text( (d,i) => this.y[i].id );
     }
     
     private getIndex(axisObjArray: AxisObj[], id: string) {
